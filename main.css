@@ -1,0 +1,170 @@
+:root {
+    --green-100: #71D31C;
+    --green-500: #4FAA00;
+    --green-950: #3D8301;
+
+    --pink-100: #F5028C;
+    --pink-500: #DF0480;
+    --pink-950: #BD026C;
+
+    --bg-full: #18181B;
+    --forms-card: #373737;
+    --forms-test: #8F8F8F;
+
+    --white-text: #FFFFFF;
+
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: inter, Arial, Helvetica, sans-serif;
+    background-color: #18181B;
+    height: 100%;
+    color: var(--white-text);
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+header img{
+    display: block;
+    margin: 20px auto;
+}
+
+main section h2{
+    margin: 20px 0;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    
+}
+.green{
+    color: var(--green-100)
+}
+
+.pink{
+    color: var(--pink-100);
+}
+
+.descricao h3 {
+    font-size: 42px;
+    font-weight: 200;
+    margin: 20px 0;
+    /* text-align: center; */
+
+}
+
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    gap: 30px;
+    margin-top: 80px;
+    height: 10vh;
+    justify-content: flex-end; /* joga o conteúdo pro fim */
+}
+#sugestoes{
+    height: 100%;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 300px;
+    /* max-width: 400px; */
+}
+
+.campo label {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+textarea {
+    background-color: var(--forms-card);
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    color: white;
+    resize: vertical;
+    min-height: 100px;
+    font-size: 14px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; 
+  }
+
+button[type="submit"] {
+    background-color: var(--green-500);
+    color: white;
+    font-weight: bold;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100px;
+    margin-top: 40px;
+  }
+  
+
+button[type="submit"]:hover {
+    background-color: var(--green-950);
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 0 10px;
+    }
+    header img{
+        height: 60px;
+        width: 60px;
+    }
+
+    main section h2{
+        font-size: 30px;
+    }
+    .descricao h3{
+        font-size: 24px;
+    }
+    .formulario {
+        margin-top: 10px;
+
+    }
+    .campo label{
+        font-size: 16px;
+    }
+
+    textarea {
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .button-container {
+        justify-content: center;
+    }
+
+
+}

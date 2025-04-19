@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inter Band</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    #mensagem {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+      color: var(--green-100);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #mensagem.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    button[type="submit"] {
+      transition: all 0.3s ease;
+    }
+
+    button[type="submit"]:disabled {
+      background-color: var(--forms-test);
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="logo-inter-svg.svg" alt="Logo interligos">
+    </header>
+
+    <main>
+      <section>
+        <h2>A <span class="pink">Inter Band</span> quer ouvir <span class="green">você!</span></h2>
+      </section>
+
+      <section class="descricao">
+        <h3>Conte pra gente o que achou dos cultos ultimamente e o que gostaria de ouvir nas próximas ministrações!</h3>
+      </section>
+      
+      <form id="form" method="POST" class="formulario">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_next" value="https://seusite.com/obrigado.html">
+        <input type="hidden" name="_subject" value="Novo feedback da Inter Band">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="campo" id="campo1">
+          <label for="sugestoes">
+            Fale sobre a <span class="green">sua experiência</span> nos cultos:
+          </label>
+          <textarea id="sugestoes" name="sugestoes" placeholder="Conte sobre o que achou dos ultimos cultos (músicas, ministrações, e outros...)" required></textarea>
+        </div>
+
+        <div class="campo" id="campo2">
+          <label for="outras">
+            Diga <span class="pink">suas sugestões</span> de <span class="pink">músicas</span>:
+          </label>
+          <textarea id="outras" name="outras" placeholder="Ajude a montar o repertório! Quais músicas você gostaria de ouvir?"></textarea>
+
+          <div class="button-container">
+            <button type="submit">Enviar</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="mensagem">Mensagem enviada com sucesso! Obrigado pelo seu feedback.</div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
+      
+      // Mostrar estado de carregamento
+      submitButton.disabled = true;
+      submitButton.textContent = 'Enviando...';
+
+      const data = new FormData(form);
+
+      fetch("https://formsubmit.co/ajax/asapharruda.dev@gmail.com", {
+        method: "POST",
+        body: data
+      })
+      .then(response => response.json())
+      .then(data => {
+        const msg = document.getElementById('mensagem');
+        msg.classList.add('show');
+        
+        // Resetar o formulário após 3 segundos
+        setTimeout(() => {
+          form.reset();
+          msg.classList.remove('show');
+        }, 3000);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("Erro ao enviar. Verifique sua conexão e tente novamente.");
+      })
+      .finally(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      });
+    });
+  </script>
+</body>
+</html>
